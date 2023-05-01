@@ -3,3 +3,5 @@
 <img width="960" alt="2023-05-01 (4)" src="https://user-images.githubusercontent.com/121668531/235446237-68cbdadd-b2a5-4f68-b707-81da202464a9.png">
 # ADD USER PAGE
 <img width="960" alt="2023-05-01 (6)" src="https://user-images.githubusercontent.com/121668531/235446719-70ae07f8-8da9-42ec-bf5c-8ba291d15e01.png">
+UPDATE PAGE
+<img width="960" alt="2023-05-01 (7)" src="https://user-images.githubusercontent.com/121668531/235446846-396a4e29-7ef1-4877-ba50-b355c2508b5e.png">
