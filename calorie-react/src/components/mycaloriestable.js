@@ -12,10 +12,12 @@ import axios from 'axios';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import CreateIcon from '@mui/icons-material/Create';
-import { IconButton } from '@mui/material';
+import { IconButton, colors, useColorScheme } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
+
 
 
 const columns = [
@@ -36,6 +38,8 @@ export default function MyCaloriesTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [mycalories,setMycalories] = useState([])
   const [sortType,setSortType] = useState("asc");
+
+
 
 const getCalTable= () =>{
   axios.get('http://localhost:3004/calorie-cal').then(res => {
@@ -71,13 +75,13 @@ const  onDelete=(id)=>{
    
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Paper sx={{ width: '115%', overflow: 'hidden' }}  style={{ backgroundColor: 'rgb(230, 255, 255)'}}>
+      <TableContainer sx={{ maxHeight: 500} }>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow>
+            <TableRow >
               {columns.map((column) => (
-                <TableCell
+                <TableCell style={{ backgroundColor: '#9CC3D5'}}
                   key={column.id}
                   onClick={()=>{
                     if(column.label==="Date"){
@@ -104,18 +108,18 @@ const  onDelete=(id)=>{
               .map((row,i) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={i} >
-                    <TableCell>{i+1}</TableCell>
-                    <TableCell>{moment(row.date).format("DD/MM/YYYY")}</TableCell>
+                    <TableCell >{i+1+(page*rowsPerPage)}</TableCell>
+                    <TableCell >{moment(row.date).format("DD/MM/YYYY")}</TableCell>
                     <TableCell>{row.userName}</TableCell>
-                    <TableCell>{row.totalCaloriesIntake + "/" + row.targetCaloriesIntake + " cal"}</TableCell>
+                    <TableCell style={{width:'120px'}}>{row.totalCaloriesIntake + "/" + row.targetCaloriesIntake + " cal"}</TableCell>
                     <TableCell>{(row.totalCaloriesIntake < row.targetCaloriesIntake) ? "Not Achieved":"Achieved"} </TableCell>
-                    <TableCell>{row.totalCaloriesBurned + "/" + row.targetCaloriesBurned + " cal"}</TableCell>
+                    <TableCell style={{width:'120px'}}>{row.totalCaloriesBurned + "/" + row.targetCaloriesBurned + " cal"}</TableCell>
                     <TableCell>{(row.totalCaloriesBurned < row.targetCaloriesBurned) ? "Not Achieved":"Achieved"}</TableCell>
-                    <TableCell  >
-                      <IconButton onClick={()=>navigate('/calorie-management/' + row._id)}><CreateIcon/></IconButton>
+                    <TableCell style={{width:'120px'}}>
+                      <IconButton style={{color:'#0063B2'}} onClick={()=>navigate('/calorie-management/' + row._id)}><CreateIcon/></IconButton>
                       <IconButton onClick={()=>{
                         onDelete(row._id)
-                      }}><DeleteIcon/></IconButton>
+                      }} style={{color:'#A4193D'}}><DeleteIcon/></IconButton>
                       </TableCell>
                   </TableRow>
           

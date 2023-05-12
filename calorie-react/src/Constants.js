@@ -37,7 +37,19 @@ const activities = [
        "food":"orange",
        "Calories":120,
        "Quantity":1
-    }
+    },
+    {
+       "id":5,
+       "food" : "biryani",
+       "Calories":200,
+       "Quantity":1
+    },
+    {
+      "id":6,
+      "food" : "salad",
+      "Calories":20,
+      "Quantity":1
+   }
  ]
 
  export {activities,food_data}

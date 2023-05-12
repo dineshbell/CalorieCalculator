@@ -7,19 +7,21 @@ import {
   Select,
   Button,
 } from "@mui/material";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import DatePickerValue from "./DatePicker";
 import { food_data, activities } from "../Constants";
 import axios from "axios";
-import { useNavigate,useParams } from 'react-router-dom';
-import moment from 'moment';
+import { useNavigate, useParams } from "react-router-dom";
+import moment from "moment";
+import { lightBlue } from "@mui/material/colors";
 
 
 
 const CalorieManagement = () => {
-  const navigate =  useNavigate()
+  const navigate = useNavigate();
 
-  const {id} = useParams();
+
+  const { id } = useParams();
   const initialValues = {
     userName: "",
     date: "",
@@ -35,32 +37,50 @@ const CalorieManagement = () => {
     steps: 0,
   };
 
-
-
   const [myCalories, setmyCalories] = useState(initialValues);
   const handleChange = (e) => {
     let { name, value } = e.target;
-    console.log(value)
+    console.log(value);
     setmyCalories((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-   useEffect(()=>{
-    if(id){
-      axios.get('http://localhost:3004/calorie-cal/' +id)
-      .then(res=>{
-      const { userName,date,food,quantity,steps,activity,totalCaloriesIntake, targetCaloriesIntake, totalCaloriesBurned, targetCaloriesBurned} = res.data
-      setmyCalories({ userName,date,food,quantity,steps,activity,totalCaloriesIntake, targetCaloriesIntake, totalCaloriesBurned, targetCaloriesBurned})
-      })
+  useEffect(() => {
+    if (id) {
+      axios.get("http://localhost:3004/calorie-cal/" + id).then((res) => {
+        const {
+          userName,
+          date,
+          food,
+          quantity,
+          steps,
+          activity,
+          totalCaloriesIntake,
+          targetCaloriesIntake,
+          totalCaloriesBurned,
+          targetCaloriesBurned,
+        } = res.data;
+        setmyCalories({
+          userName,
+          date,
+          food,
+          quantity,
+          steps,
+          activity,
+          totalCaloriesIntake,
+          targetCaloriesIntake,
+          totalCaloriesBurned,
+          targetCaloriesBurned,
+        });
+      });
     }
-  
-  },[])
+  }, []);
 
   const totalCalorieIntake = () => {
     if (myCalories.food) {
-      let value = food_data.find((eachrow) => eachrow.food == myCalories.food);
+      let value = food_data.find((eachrow) => eachrow.food === myCalories.food);
       return value.Calories * myCalories.quantity;
     } else {
       return 0;
@@ -79,57 +99,61 @@ const CalorieManagement = () => {
   };
 
   const onClick = () => {
-    if(id){
-
-    axios
-      .put("http://localhost:3004/calorie-cal/" + id, {
-        ...myCalories,
-        totalCaloriesIntake:totalCalorieIntake(),
-        totalCaloriesBurned:totalCaloriesBurned()
-    })
-      .then((response) => {
-       navigate('/')
-      }); 
-    }else{
+    if (id) {
       axios
-      .post("http://localhost:3004/calorie-cal", {
-        ...myCalories,
-        totalCaloriesIntake:totalCalorieIntake(),
-        totalCaloriesBurned:totalCaloriesBurned()
-    })
-      .then((response) => {
-       navigate('/')
-      });
+        .put("http://localhost:3004/calorie-cal/" + id, {
+          ...myCalories,
+          totalCaloriesIntake: totalCalorieIntake(),
+          totalCaloriesBurned: totalCaloriesBurned(),
+        })
+        .then((response) => {
+          navigate("/");
+        });
+    } else {
+      axios
+        .post("http://localhost:3004/calorie-cal", {
+          ...myCalories,
+          totalCaloriesIntake: totalCalorieIntake(),
+          totalCaloriesBurned: totalCaloriesBurned(),
+        })
+        .then((response) => {
+          navigate("/");
+        });
     }
   };
   return (
+    <div>
     <Grid
       container
       // direction="column"
+      style={{color:'black'}}
       justifyContent="flex-start"
       alignItems="flex-start"
       spacing={2}
+      backgroundColor={lightBlue}
+      fontFamily={"cursive"}
+      
     >
-      <Grid item xs={12}>
+      <Grid item xs={12} fontFamily={"cursive"} >
         <TextField
           label="Name"
           name="userName"
           onChange={handleChange}
           value={myCalories.userName}
+         
         />
       </Grid>
       <Grid item xs={12}>
         <DatePickerValue
           name="date"
           value={myCalories.date}
-          onChange={(newValue) =>{
-            console.log(newValue)
+          onChange={(newValue) => {
+            console.log(newValue);
             setmyCalories((prev) => ({
               ...prev,
               date: moment(newValue).toDate(),
-            }))
-          }
-          }
+            }));
+          }}
         />
       </Grid>
 
@@ -137,7 +161,7 @@ const CalorieManagement = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Food</InputLabel>
+              <InputLabel id="demo-simple-select-label" style={{color:'black'}}>Food</InputLabel>
               <Select
                 displayEmpty
                 labelId="demo-simple-select-label"
@@ -193,7 +217,7 @@ const CalorieManagement = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Acitivity</InputLabel>
+              <InputLabel id="demo-simple-select-label"  style={{color:'black'}}>Acitivity</InputLabel>
               <Select
                 displayEmpty
                 labelId="demo-simple-select-label"
@@ -227,7 +251,7 @@ const CalorieManagement = () => {
           <Grid item xs={12}>
             <TextField
               label="Total Calories burned"
-              name="totalCaloriesBurned"
+              name="totalCaloriesBurned" 
               onChange={handleChange}
               value={totalCaloriesBurned()}
               disabled
@@ -248,12 +272,12 @@ const CalorieManagement = () => {
         </Grid>
       </Grid>
       <Grid item>
-        <Button variant="contained" onClick={onClick}>
-  
-         {id? "Update":"Submit"} 
+        <Button variant="contained" onClick={onClick} style={{backgroundColor:'#0A174E'}}>
+          {id ? "Update" : "Submit"}
         </Button>
       </Grid>
     </Grid>
+    </div>
   );
 };
 

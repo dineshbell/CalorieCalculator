@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #98a7c5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -45,3 +45,12 @@
   display:flex;
   justify-content: center;
 }
+.bg{
+  background-color:rgb(184, 196, 197);
+  background-size: cover;
+  opacity: 0.8;
+      /* background-color: rgb(63, 164, 211);     */
+}
+/* .text{
+  /* font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+ 

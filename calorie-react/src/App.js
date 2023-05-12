@@ -12,10 +12,10 @@ import CalorieManagement from "./components/caloriemanagent";
 
 function App() {
   return (
-   <>
+   <div className="bg">
    <BrowserRouter>
     <ButtonAppBar/>
-    <div className="calorie-body">
+    <div className="calorie-body ">
     <div  className="calorie-container">
     <Routes>
           <Route path='/' element={<MyCaloriesTable/>}></Route>
@@ -25,7 +25,7 @@ function App() {
     </div>
     </div>
     </BrowserRouter>
-    </>
+    </div>
   );
 }
 
