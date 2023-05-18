@@ -134,7 +134,7 @@ const CalorieManagement = () => {
       fontFamily={"cursive"}
       
     >
-      <Grid item xs={12} fontFamily={"cursive"} >
+      <Grid item xs={12}  >
         <TextField
           label="Name"
           name="userName"

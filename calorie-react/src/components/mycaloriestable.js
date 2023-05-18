@@ -109,7 +109,7 @@ const  onDelete=(id)=>{
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={i} >
                     <TableCell >{i+1+(page*rowsPerPage)}</TableCell>
-                    <TableCell >{moment(row.date).format("DD/MM/YYYY")}</TableCell>
+                    <TableCell >{moment(row.date).format("YYYY/MM/DD")}</TableCell>
                     <TableCell>{row.userName}</TableCell>
                     <TableCell style={{width:'120px'}}>{row.totalCaloriesIntake + "/" + row.targetCaloriesIntake + " cal"}</TableCell>
                     <TableCell>{(row.totalCaloriesIntake < row.targetCaloriesIntake) ? "Not Achieved":"Achieved"} </TableCell>
